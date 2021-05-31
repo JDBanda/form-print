@@ -1,4 +1,6 @@
 $(function () {
+    var cont = 0;
+    var current;
     //Print screen data
     $('#printer').click(function () {
         window.print();
@@ -12,7 +14,7 @@ $(function () {
         //Remove input data
         removeInputs();
         deleteCont();
-        //edit();
+        edit();
     });
 
     //Save changes and put info into principal page
@@ -57,31 +59,50 @@ $(function () {
             //Radio
             $('input:radio[name="radius-use"][value="' + $(data).find('.p-radius').text() + '"]').prop('checked', true);
             $('#input-period-accident').val($(data).find('.p-period-accident').text());
-            $('#edit-data').click(function () {
-                $(data).remove();
-                //Guardar datos
-                $('.cont').append(generateTemplate());
-                //Remove input data
-                removeInputs();
-            });
+            current = $(data).attr('id');
+            console.log(current);
         })
     }
 
+    $('#edit-data').click(function () {
+        //Guardar datos, similar al método de generar la plantilla
+        var data = $('#' + current);
+        $(data).find('.p-employeer').text($('#input-employeer').val());
+        $(data).find('.p-phone').text($('#input-phone').val());
+        $(data).find('.p-address').text($('#input-address').val());
+        //Dates 
+        $(data).find('.p-date-from').text($('#input-date-from').val());
+        $(data).find('.p-date-to').text($('#input-date-to').val());
+        //Numeric data
+        $(data).find('.p-amount-straight').text($('#input-amount-straight').val());
+        $(data).find('.p-amount-tractor').text($('#input-amount-tractor').val());
+        $(data).find('.p-amount-dump').text($('#input-amount-dump').val());
+        $(data).find('.p-driving-log').text($('#input-driving-log').val());
+        $(data).find('.p-driving-service').text($('#input-driving-service').val());
+        $(data).find('.p-driving-other').text($('#input-driving-other').val());
+        $(data).find('.p-type').text(recoverChecks());
+        $(data).find('.p-other').text(recoverOther());
+        $(data).find('p-radius').text($('input:radio[name="radius-use"]:checked'));
+        $(data).find('.p-period-accident').text($('#input-period-accident').val());
+        //Remove input data
+        removeInputs();
+    });
+
     //Recover checked data and other
     function recoverChecks() {
-        var data = '';
+        var data = "";
         //Search for all values checked and obtain it
         $('input[name="type-driving"]').each(function () {
             if ($(this).is(':checked')) {
                 data += $(this).val() + ',';
             }
         });
-        if ($('#type-driving-other').val() != "") {
-            data += '<span class="p-other">' + $('#type-driving-other').val() + '</span>';
-        } else {
-            //Removes the latest comma
-            data = data.slice(0, -1);
-        }
+        return data;
+    }
+
+    function recoverOther() {
+        data = "";
+        data = $('#type-driving-other').val();
         return data;
     }
 
@@ -112,17 +133,18 @@ $(function () {
     }
 
     function generateTemplate() {
-        var template = '<div class="data-box">';
+        var template = '<div id="' + cont + '" class="data-box">';
         template += '<button class="button is-danger is-rounded">Delete</button>' +
             '<button class="button is-primary is-rounded">Edit</button>' +
-            '<p><strong>Employeer: </strong><span class="p-employeer">' + $('#input-employeer').val() + ' </span><strong>Phone: </strong><span class="p-phone">' + $('#input-phone').val() + ' </span></p>' +
+            '<p><strong>Employeer: </strong><span class="p-employeer">' + $('#input-employeer').val() + ' </span><strong> Phone: </strong><span class="p-phone">' + $('#input-phone').val() + ' </span></p>' +
             '<p><strong>Address: </strong><span class="p-address">' + $('#input-address').val() + ' </span></p>' +
             '<p><strong>Date of employment: </strong><span class="p-date-from">' + $('#input-date-from').val() + ' </span><strong>To: </strong><span class="p-date-to">' + $('#input-date-to').val() + ' </span></p>' +
             '<h5>Amount of experience:</h5> <p><strong>Stright truck: </strong><span class="p-amount-straight">' + $('#input-amount-straight').val() + '</span>% <strong>Tractor/Semi Trailer: </strong><span class="p-amount-tractor">' + $('#input-amount-tractor').val() + '</span>% <strong>Dump Truck: </strong><span class="p-amount-dump">' + $('#input-amount-dump').val() + '</span>%</p>' +
             '<h5>Driving Vehicle Types Listed:</h5> <p><strong>Log truck: </strong><span class="p-driving-log">' + $('#input-driving-log').val() + '</span>% <strong>Service Vehicle: </strong><span class="p-driving-service">' + $('#input-driving-service').val() + '</span>% <strong>Other: </strong><span class="p-driving-other">' + $('#input-driving-other').val() + '</span>%</p>' +
-            '<p><strong>Type of Driving: </strong><span class="p-type">' + recoverChecks() + '</span></p>' +
+            '<p><strong>Type of Driving: </strong><span class="p-type">' + recoverChecks() + '</span>' + '<span class="p-other">' + recoverOther() + '</span></p>' +
             '<p><strong>Radius of use: </strong><span class="p-radius">' + $('input[name="radius-use"]:checked').val() + '</span></p>' +
             '<p><strong>Have you had any accidents during this period?: </strong><span class="p-period-accident">' + $('#input-period-accident').val() + '<span></p></div>';
+        cont++;
         return template;
     }
 

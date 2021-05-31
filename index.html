@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <!-- Own Styles -->
+    <link rel="stylesheet" href="view/css/styles.css">
+    <title>Driver History</title>
+</head>
+
+<body>
+    <div class="content">
+        <div class="has-text-centered">
+            <h4 class="title">COMMERCIAL DRIVER EMPLOYMENT CURRENT HISTORY</h4>
+            <h5 class="subtitle">(Truckers)</h5>
+        </div>
+        <div class="cont">
+            <!-- contenido de cada experiencia -->
+        </div>
+        <p>During the past three years, have you had at least two years over-the-road driving experience with equipment
+            similar to that which you will operating for this employeer?
+        <div class="control">
+            <label class="radio">
+                <input type="radio" name="answer">
+                Yes
+            </label>
+            <label class="radio">
+                <input type="radio" name="answer">
+                No
+            </label>
+        </div>
+        </p>
+        <p>The undersigned applicant represents that the information provided herein is true and correct. I further
+            understand that by applying for insurance, I authorize Nationwide Insurance to verify the information
+            provided above.</p>
+        <br><br>
+        <div>
+            <div class="columns has-text-centered">
+                <div class="column">
+                    <p class="border-top">Signature of the named Insured driver</p>
+                </div>
+                <br>
+                <div class="column">
+                    <p class="border-top"> Date </p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="columns is-mobile">
+            <div class="column">
+                <button id="printer" class="button is-success is-rounded is-fullwidth">Print
+                    Information</button>
+            </div>
+            <div class="column">
+                <button class="experience button is-warning is-rounded is-fullwidth">Add experience</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Adding experience</p>
+                <button class="experience delete" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <!-- 1st -->
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Employeer</label>
+                            <div class="control">
+                                <input class="input" id="input-employeer" type="text" placeholder="Employeer's name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Phone</label>
+                            <div class="control">
+                                <input class="input" id="input-phone" type="text" placeholder="Employeer's phone">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 2nd -->
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Address</label>
+                            <div class="control">
+                                <input class="input" id="input-address" type="text"
+                                    placeholder="Complete adress of the employeer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 3rd -->
+                <h5>Date of employment</h5>
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">From (MO/YR):</label>
+                            <div class="control">
+                                <input class="input" id="input-date-from" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">To (MO/YR)</label>
+                            <div class="control">
+                                <input class="input" id="input-date-to" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4th -->
+                <h5>Amount of experience</h5>
+                <div class="columns">
+                    <div class="column">
+
+                        <label class="label">Straight truck</label>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" id="input-amount-straight" type="number">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    %
+                                </a>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="column">
+                        <label class="label">Tractor/Semi Trailer</label>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" id="input-amount-tractor" type="number">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    %
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label class="label">Dump truck</label>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" id="input-amount-dump" type="number">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    %
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5th -->
+                <h5>Driving Vehicle Types Listed</h5>
+                <div class="columns">
+                    <div class="column">
+                        <label class="label">Log truck</label>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" id="input-driving-log" type="number">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    %
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label class="label">Service Vehicle</label>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" id="input-driving-service" type="number">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    %
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label class="label">Other</label>
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" id="input-driving-other" type="number">
+                            </p>
+                            <p class="control">
+                                <a class="button">
+                                    %
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 6th -->
+                <h5>Type of Driving</h5>
+                <div class="columns">
+                    <div class="column">
+                        <label class="checkbox" data="For - Hire">
+                            <input type="checkbox" name="type-driving" id="type-1" value="For - Hire">For - Hire
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox" data="Private Carrier">
+                            <input type="checkbox" name="type-driving" id="type-2" value="Private Carrier">Private
+                            Carrier
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox" data="Farm">
+                            <input type="checkbox" name="type-driving" id="type-3" value="Farm">Farm
+                        </label>
+                    </div>
+                    <div class="column">
+                        <label class="checkbox" data="Passenger">
+                            <input type="checkbox" name="type-driving" id="type-4" value="Passenger">Passenger
+                        </label>
+                    </div>
+                    <div class="column">
+                        <input type="text" class="input" id="type-driving-other"
+                            placeholder="Write other separated by comma">
+                    </div>
+                </div>
+                <!-- 7th -->
+                <h5>Radius of use</h5>
+
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" name="radius-use" id="radius-1" value="0 - 100 miles">
+                        0 - 100 miles
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="radius-use" id="radius-2" value="101 - 300 miles">
+                        101 - 300 miles
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="radius-use" id="radius-3" value="301 - 500 miles">
+                        301 - 500 miles
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="radius-use" id="radius-4" value="Over 500 miles">
+                        Over 500 miles
+                    </label>
+                </div>
+                <!-- 8th -->
+                <div class="columns">
+                    <div class="column">
+                        <div class="field">
+                            <label class="label">Have you had any accidents during the period?</label>
+                            <div class="control">
+                                <input class="input" id="input-period-accident" type="text"
+                                    placeholder="If yes, please describe it">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success is-rounded" id="save-changes">Save changes</button>
+                <button class="button is-success is-rounded" id="edit-data">Edit data</button>
+                <button class="button experience is-rounded">Cancel</button>
+            </footer>
+        </div>
+    </div>
+</body>
+<script src="view/js/main.js"></script>
+
+</html>

@@ -1,0 +1,23 @@
+.content{
+    padding: 15px;
+}
+.border-top{
+    padding-top: 15px;
+    border-top: 2px solid black;
+}
+.modal-card{
+    margin: 0;
+    width: auto;
+}
+.data-box{
+    border: 2px solid black;
+    padding: 15px;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+@media print {
+    .button, .columns.is-mobile{
+        display: none;
+    }
+}
